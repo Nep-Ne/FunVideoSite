@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import SigninScreen from './screen/SigninScreen';
 import SignupScreen from './screen/SignupScreen';
+import VideoScreen from './screen/VideoScreen';
 function App() {
   const Header = () => {
     return (
@@ -45,7 +46,8 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Container>
+      {/* để full cho screen thì phải thêm fluid ở cả container app.js chứ ko phải chỉ mình container phần ...Screen.js và cấu hình lại cho container-fluid trong file index.css nữa !!!!! */}
+      <Container fluid>
         
         
       <body class="d-flex flex-column min-vh-100">
@@ -53,6 +55,7 @@ function App() {
         {/* nếu ko có exact={true} thì nó sẽ kết hợp cái Homescreen lại luôn vi Homescreen có đường dẫn là / và /signin cũng có */}
       <Route path= "/signin" component ={SigninScreen}/>
       <Route path= "/signup" component ={SignupScreen}/>
+      <Route path= "/id" component ={VideoScreen}/>
       </body>
         
       </Container>
