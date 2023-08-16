@@ -1,7 +1,7 @@
 import react from "react";
-import data from '../data.js'
+import data from '../data.js';
 
-import Row from 'react-bootstrap/Row';
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 function HomeScreen(props) {
     const videos = data.videos;//nếu để data không thì sẽ bị lỗi vì data không có hàm map chỉ có cái videos của cái data (data.videos) thì mới có thể sử dụng hàm map !!
     console.log(videos);//xem consolse của frontend trong phần kiểm tra phần tử !!!
@@ -18,6 +18,27 @@ function HomeScreen(props) {
 
         <div className="container-fluid pb-video-container">
             <h3 className="text-center">Sample Video Gallery</h3>
+            <Container fluid className="mt-5 d-flex justify-content-center">
+                <Row>
+                    <Col md={10}>
+                        <Form className="d-flex">
+                            <Form.Control
+                                type="search"
+                                placeholder="Search"
+                                className="md-12"
+                                aria-label="Search"
+                            />
+
+                        </Form>
+                    </Col>
+                    <Col md={2}>
+                        <Button>
+                            Search
+                        </Button>
+
+                    </Col>
+                </Row>
+            </Container>
             {/* nếu ko có Row thì mỗi lần map thì nó sẽ tự động xuống dòng */}
             {/* Row nằm đây để có gì các video nằm trên cùng 1 row nếu để row nằm trong phần map thì dẫn đến mỗi video trên mỗi Row vì row được tạo liên tục mỗi lần map !! */}
             <Row>

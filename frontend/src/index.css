@@ -26,10 +26,12 @@
   background-color:green;
 }
 
+
 .pb-video-container {
-  padding-top: 20px;
+  padding-top: 40px;
   background: #bdc3c7;
   font-family: Lato;
+  margin: 0px;
 }
 
 .pb-video {
@@ -74,4 +76,51 @@
   height: 130px;
   width: 100%;
   border: 1px solid #F2F2F2;
+}
+
+.form-control
+{
+  margin-bottom: 15px;
+}
+
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #BA68C8
+}
+
+.profile-button {
+  background: rgb(99, 39, 120);
+  box-shadow: none;
+  border: none
+}
+
+.profile-button:hover {
+  background: #682773
+}
+
+.profile-button:focus {
+  background: #682773;
+  box-shadow: none
+}
+
+.profile-button:active {
+  background: #682773;
+  box-shadow: none
+}
+
+.back:hover {
+  color: #682773;
+  cursor: pointer
+}
+
+.labels {
+  font-size: 11px
+}
+
+.add-experience:hover {
+  background: #BA68C8;
+  color: #fff;
+  cursor: pointer;
+  border: solid 1px #BA68C8
 }

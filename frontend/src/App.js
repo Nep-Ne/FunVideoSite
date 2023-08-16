@@ -9,6 +9,9 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import SigninScreen from './screen/SigninScreen';
 import SignupScreen from './screen/SignupScreen';
 import VideoScreen from './screen/VideoScreen';
+import ProfileScreen from './screen/ProfileScreen';
+import ListVideoScreen from './screen/ListVideoScreens';
+import UploadScreen from './screen/UploadScreen';
 function App() {
   const Header = () => {
     return (
@@ -18,6 +21,7 @@ function App() {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
         <Button href="/signin">Signin</Button>
+        {/* <Button href="/videos">Signin</Button> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -55,13 +59,16 @@ function App() {
         {/* nếu ko có exact={true} thì nó sẽ kết hợp cái Homescreen lại luôn vi Homescreen có đường dẫn là / và /signin cũng có */}
       <Route path= "/signin" component ={SigninScreen}/>
       <Route path= "/signup" component ={SignupScreen}/>
+      <Route path= "/profile" component ={ProfileScreen}/>
+      <Route path= "/videos" component ={ListVideoScreen}/>
+      <Route path= "/uploads" component ={UploadScreen}/>
       <Route path= "/id" component ={VideoScreen}/>
       </body>
         
       </Container>
-      <footer class="mt-auto footer">
+      <footer class="mt-0 footer">
       <Navbar >
-        <Container>
+        <Container >
           <p>&copy; 2023 Your Website</p>
         </Container>
         </Navbar>
