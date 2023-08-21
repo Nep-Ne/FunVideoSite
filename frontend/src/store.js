@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-// import Cookie from 'js-cookie';
-// import {
-//   productListReducer,
-//   productDetailsReducer,
-//   productSaveReducer,
-//   productDeleteReducer,
-//   productReviewSaveReducer,
-// } from './reducers/productReducers';
+ import Cookie from 'js-cookie';
+ import {
+   videoListReducer,
+//   videoDetailsReducer,
+//   videoSaveReducer,
+//   videoDeleteReducer,
+//   videoReviewSaveReducer,
+ } from './reducers/videoReducers';
 // import { cartReducer } from './reducers/cartReducers';
 // import {
 //   userSigninReducer,
@@ -31,14 +31,14 @@ const initialState = {
   // userSignin: { userInfo },
 };
 const reducer = combineReducers({
-  // productList: productListReducer,
-  // productDetails: productDetailsReducer,
+   videoList: videoListReducer,
+  // videoDetails: videoDetailsReducer,
   // cart: cartReducer,
   // userSignin: userSigninReducer,
   // userRegister: userRegisterReducer,
-  // productSave: productSaveReducer,
-  // productDelete: productDeleteReducer,
-  // productReviewSave: productReviewSaveReducer,
+  // videoSave: videoSaveReducer,
+  // videoDelete: videoDeleteReducer,
+  // videoReviewSave: videoReviewSaveReducer,
   // orderCreate: orderCreateReducer,
   // orderDetails: orderDetailsReducer,
   // orderPay: orderPayReducer,

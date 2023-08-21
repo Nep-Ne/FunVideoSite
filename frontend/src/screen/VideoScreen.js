@@ -39,8 +39,8 @@ function VideoScreen(props) {
                     // <div className="col-md-4" key={video.id}> nếu lấy cái này thì nó sẽ lấy 4/12 diện tích(4/12  =1/3) của cái Col md={2}
                     <Col key={video.id}>
                         <div className="pb-video">
-                            <video className="pb-video-frame" width="100%" height="100" src={video.video} controls ></video>
-                            <a className="form-control label-warning text-center" href="/id">{video.name} - {video.author}</a>
+                            <video className="pb-video-frame" width="100%" height="100" src={video.path} controls ></video>
+                            <a className="form-control label-warning text-center" href="/id">{video.title} - {video.author}</a>
                         </div>
                     </Col>
                 ))}
