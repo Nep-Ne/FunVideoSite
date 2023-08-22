@@ -3,9 +3,9 @@ import thunk from 'redux-thunk';
  import Cookie from 'js-cookie';
  import {
    videoListReducer,
-//   videoDetailsReducer,
-//   videoSaveReducer,
-//   videoDeleteReducer,
+  videoDetailsReducer,
+  videoSaveReducer,
+  videoDeleteReducer,
 //   videoReviewSaveReducer,
  } from './reducers/videoReducers';
 // import { cartReducer } from './reducers/cartReducers';
@@ -32,12 +32,12 @@ const initialState = {
 };
 const reducer = combineReducers({
    videoList: videoListReducer,
-  // videoDetails: videoDetailsReducer,
+  videoDetails: videoDetailsReducer,
   // cart: cartReducer,
   // userSignin: userSigninReducer,
   // userRegister: userRegisterReducer,
-  // videoSave: videoSaveReducer,
-  // videoDelete: videoDeleteReducer,
+  videoSave: videoSaveReducer,
+  videoDelete: videoDeleteReducer,
   // videoReviewSave: videoReviewSaveReducer,
   // orderCreate: orderCreateReducer,
   // orderDetails: orderDetailsReducer,

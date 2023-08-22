@@ -30,12 +30,37 @@ import {
     }
   };
   
+  const yourVideos = () => async (dispatch) => {
+    try {
+      dispatch({ type: VIDEO_LIST_REQUEST });
+      const { data } = await axios.get(
+        '/api/videos' 
+      );
+      dispatch({ type: VIDEO_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: VIDEO_LIST_FAIL, payload: error.message });
+    }
+  };
+
+  const detailsVideos =(videoId) => async(dispatch) =>
+  {
+    try{
+      dispatch({ type: VIDEO_DETAILS_REQUEST });
+      const { data } = await axios.get(
+        '/api/videos/' + videoId
+      );
+      dispatch({ type: VIDEO_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: VIDEO_DETAILS_FAIL, payload: error.message });
+    }
+  };
 
 
   export {
     listVideos,
-    // detailsVIDEOS,
-    // saveVIDEOS,
-    // deleteProdcut,
-    // saveVIDEOSReview,
+    detailsVideos,
+    // yourVideos,
+    // saveVideos,
+    // deleteVideos,
+    // saveVideosReview,
   };

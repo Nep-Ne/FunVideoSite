@@ -17,7 +17,7 @@ function App() {
     return (
       <Navbar className="header">
       <Container>
-        <Navbar.Brand href="/">FunVideoSite</Navbar.Brand>
+        <Navbar.Brand className='nav-brand' href="/">FunVideoSite</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
         <Button href="/signin">Signin</Button>
@@ -62,7 +62,7 @@ function App() {
       <Route path= "/profile" component ={ProfileScreen}/>
       <Route path= "/videos" component ={ListVideoScreen}/>
       <Route path= "/uploads" component ={UploadScreen}/>
-      <Route path= "/id" component ={VideoScreen}/>
+      <Route path= "/video/:id" component ={VideoScreen}/>
       </body>
         
       </Container>

@@ -34,7 +34,7 @@ function HomeScreen(props) {
                 <div>{error}</div>
             ) : (
 
-                <div className="container-fluid pb-video-container">
+                <div className="container-fluid pb-video-container" >
                     <h3 className="text-center">Sample Video Gallery</h3>
                     <Container fluid className="mt-5 d-flex justify-content-center">
                         <Row>
@@ -61,14 +61,14 @@ function HomeScreen(props) {
                     {/* Row nằm đây để có gì các video nằm trên cùng 1 row nếu để row nằm trong phần map thì dẫn đến mỗi video trên mỗi Row vì row được tạo liên tục mỗi lần map !! */}
                     <Row>
                         {videos.map((video) => (
-                            <div className="col-md-4" key={video.id}>
+                            <div className="col-md-4" key={video._id}>
                                 {/* col-md-4 với ý nghĩa cột này chiếm 4/12, ý nghĩa của 12 là cứ 1 hàng trong grid được chia làm 12 phần bằng nhau và 
                         ta cần tường minh 1 cột sẽ chiếm mấy phần của 1 hàng col-md-6 thì có nghĩa là 
                         nó chiếm 6/12 của cái dòng và kết hợp cái đầu tiên thì dòng này đã sử dụng 10/12 và chỉ còn tối đa 
                         thêm 1 cột col-md-2 nữa thôi nếu lớn hơn thì sẽ tự động dưa xuống dòng tiếp theo*/}
                                 <div className="pb-video">
-                                    <video className="pb-video-frame" width="100%" height="230" src={video.path} controls ></video>
-                                    <a className="form-control label-warning text-center" href="/id">{video.title} - {video.author}</a>
+                                    <video className="pb-video-frame" width="100%" height="230" src={video.pathvideo}  controls muted ></video>
+                                    <a className="form-control label-warning text-center" href={"/video/"+video._id}>{video.title} - {video.author}</a>
                                 </div>
                             </div>
                         ))}

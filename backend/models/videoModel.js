@@ -15,7 +15,7 @@ const videoSchema = new Schema(
         title: { type: String, require: true },
         author: { type: String, require: true },
         views: { type: Number, require: true, default: 0 },
-        path:{ type: String, require: true },
+        pathvideo:{ type: String, require: true },
         comments:[commentSchema],
     },
 );

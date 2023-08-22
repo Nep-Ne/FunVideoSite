@@ -17,6 +17,15 @@
 {
   background-color:green
 }
+.nav-brand:hover
+{
+  color: brown;
+}
+
+body
+{
+  background-color: #bdc3c7;
+}
 
 .footer {
   /* position: fix; */
@@ -29,7 +38,7 @@
 
 .pb-video-container {
   padding-top: 40px;
-  background: #bdc3c7;
+  /* background: #bdc3c7; */
   font-family: Lato;
   margin: 0px;
 }
