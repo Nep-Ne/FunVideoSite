@@ -24,11 +24,11 @@ import {
 // } from './reducers/orderReducers';
 
 // const cartItems = Cookie.getJSON('cartItems') || [];
-// const userInfo = Cookie.getJSON('userInfo') || null;
+ const userInfo = Cookie.getJSON('userInfo') || null;
 
 const initialState = {
   // cart: { cartItems, shipping: {}, payment: {} },
-  // userSignin: { userInfo },
+   userSignin: { userInfo },
 };
 const reducer = combineReducers({
    videoList: videoListReducer,

@@ -48,8 +48,8 @@ function ListVideoScreen(props) {
     const openModal = (video) => {
         setModalVisible(true);
         setId(video._id);
-        setTitle(video.name);
-        setAuthor(video.price);
+        setTitle(video.title);
+        setAuthor(video.author);
         setPathvideo(video.pathvideo);
     };
     const submitHandler = (e) => {
@@ -103,30 +103,30 @@ function ListVideoScreen(props) {
                                     <h2 className="fw-bold mb-2 text-uppercase ">Upload video</h2>
 
                                     <div className="mb-3">
-                                        <Form>
+                                        <Form onSubmit={submitHandler}>
                                             <Form.Group className="mb-3" controlId="formBasicTitle">
                                                 <Form.Label className="text-center">
                                                     Title
                                                 </Form.Label>
-                                                <Form.Control placeholder="Enter title" />
+                                                <Form.Control placeholder="Enter title" type="text" name="title" value={title} id="title" onChange={(e) => setTitle(e.target.value)} />
                                             </Form.Group>
 
                                             <Form.Group className="mb-3" controlId="formBasicAuthor">
                                                 <Form.Label className="text-center">
                                                     Author
                                                 </Form.Label>
-                                                <Form.Control placeholder="Enter author" />
+                                                <Form.Control placeholder="Enter author" type="text" name="author" value={author} id="author" onChange={(e) => setAuthor(e.target.value)} />
                                             </Form.Group>
 
                                             <Form.Group className="mb-3" controlId="formBasicPath">
                                                 <Form.Label className="text-center">
                                                     Path
                                                 </Form.Label>
-                                                <Form.Control placeholder="Path" />
+                                                <Form.Control placeholder="Path"   type="text" name="pathvideo" value={pathvideo} id="pathvideo" onChange={(e) => setPathvideo(e.target.value)} />
                                             </Form.Group>
 
                                             <label for="formFileMultiple" class="form-label">Multiple files input example</label>
-                                            <input class="form-control" type="file" id="formFileMultiple" multiple />
+                                            <input class="form-control" type="file" id="formFileMultiple" onChange={uploadFileHandler} />
 
 
 
@@ -145,6 +145,11 @@ function ListVideoScreen(props) {
                 </Row>
             </Container>)
             }
+
+
+
+
+
 
             {/* hien thi list your video  */}
             {!modalVisible && (<div className="container-fluid pb-video-container">
@@ -172,20 +177,21 @@ function ListVideoScreen(props) {
                 </Container>
                 <Row>
                     {videos.map((video) => (
-                        <div className="col-md-4" key={video.id}>
+                        <div className="col-md-4" key={video._id}>
                             <div className="pb-video">
-                                <video className="pb-video-frame" width="100%" height="230" src={video.video} controls ></video>
-                                <a className="form-control label-warning text-center" href="/id">{video.name} - {video.author}</a>
+                                <video className="pb-video-frame" width="100%" height="230" src={video.pathvideo} controls muted ></video>
+                                <a className="form-control label-warning text-center" href={"/video/" + video._id}>{video.title} - {video.author}</a>
                                 <Row>
                                     <Col md={6}>
                                         <div className="d-grid">
-                                            <Button href="/uploads" >Edit</Button>
+                                            <Button  onClick={() => openModal(video)}>Edit</Button>
                                         </div>
 
                                     </Col>
                                     <Col md={6}>
                                         <div className="d-grid">
-                                            <Button onClick={''}>Delete</Button>
+                                            <Button onClick={() => deleteHandler(video)}>Delete</Button>
+                                            {/* <Button onClick={(video) => deleteHandler(video)}>Delete</Button>  sẽ bị lỗi do onClick={(video)....  phải bỏ video đi !!!*/}
                                         </div>
 
                                     </Col>
@@ -193,7 +199,12 @@ function ListVideoScreen(props) {
 
                             </div>
                         </div>
-                    ))}
+                    ))
+                    }
+                    <div className="col-md-4 d-flex justify-content-center align-items-center">
+                    <Button onClick={() => openModal({})}>New Video</Button>
+                        
+                        </div>
 
                 </Row>
             </div>)

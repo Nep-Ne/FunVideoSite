@@ -55,7 +55,7 @@ router.put('/:id', isAuth, isAdmin, async (req, res) => {
   if (video) {
     video.title = req.body.title;
     video.author = req.body.author;
-    video.path = req.body.path;
+    video.pathvideo = req.body.pathvideo;
     const updatedVideo = await video.save();
     if (updatedVideo) {
       return res
@@ -85,7 +85,7 @@ router.post('/', isAuth, isAdmin, async (req, res) => {
     {
       title: req.body.title,
       author: req.body.author,
-      path: req.body.path
+      pathvideo: req.body.pathvideo
 
     });
   const newVideo = await video.save();
