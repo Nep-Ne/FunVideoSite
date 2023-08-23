@@ -40,11 +40,25 @@ router.get('/author/:id', async (req, res) => {
   const user = await User.findOne({_id: req.params.id});
   // console.log(user);
   const videos = await Video.find({ author: user.name });
-  if (videos) {
-    res.send(videos);
-  } else {
-    res.status(404).send({ message: 'Video Not Found.' });
+  const Allvideos = await Video.find();
+  if(user.name == "Admin")
+  {
+    if (Allvideos) {
+      res.send(Allvideos);
+    } else {
+      res.status(404).send({ message: 'Video Not Found.' });
+    }
   }
+  else
+  {
+    if (videos) {
+      res.send(videos);
+    } else {
+      res.status(404).send({ message: 'Video Not Found.' });
+    }
+
+  }
+  
 });
 
 router.get('/seed', async (req, res) => {//cái này phải được đặt trước router.get('/:id',async ....) vì nếu để sau thì nó sẽ hiểu lầm seed là giá trị của id khi sử dụng phương thức get!!!!!
@@ -61,7 +75,7 @@ router.get('/seed', async (req, res) => {//cái này phải được đặt trư
   }
 });
 
-router.put('/:id', isAuth, isAdmin, async (req, res) => {
+router.put('/:id', isAuth,  async (req, res) => {
   const videoId = req.params.id;//req.params tương ứng phần trên thanh url
   const video = await Video.findById(videoId);
   if (video) {
@@ -78,7 +92,7 @@ router.put('/:id', isAuth, isAdmin, async (req, res) => {
 
 })
 
-router.delete('/:id', isAuth, isAdmin, async (req, res) => {
+router.delete('/:id', isAuth, async (req, res) => {
   const videoId = req.params.id;
   const deletedVideo = await Video.findById(videoId);
   if (deletedVideo) {
@@ -91,7 +105,7 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
 
 })
 
-router.post('/', isAuth, isAdmin, async (req, res) => {
+router.post('/', isAuth,  async (req, res) => {
   try {
   const video = new Video(
     {

@@ -1,5 +1,5 @@
 import './App.css';
-import { useSelector } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import HomeScreen from './screen/HomeScreen';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -13,10 +13,15 @@ import VideoScreen from './screen/VideoScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import ListVideoScreen from './screen/ListVideoScreens';
 import UploadScreen from './screen/UploadScreen';
+import { logout } from './actions/userActions';
+
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  }
 
   const Header = () => {
     return (
@@ -33,8 +38,8 @@ function App() {
               <Button href="/signin">Signin</Button>
             )}
 
-            {/* {userInfo  && ( */}
-             {userInfo && userInfo.isAdmin && (
+             {userInfo  && ( 
+            //  {userInfo && userInfo.isAdmin && (
               // <div className="dropdown">
               //   <a href="#">Admin</a>
               //   <ul className="dropdown-content">
@@ -46,6 +51,7 @@ function App() {
               // </div>
               <NavDropdown title="Action" id="basic-nav-dropdown">
                 <NavDropdown.Item href={"/videos/author/" + userInfo._id}>Videos</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
             )}
           </Navbar.Collapse>

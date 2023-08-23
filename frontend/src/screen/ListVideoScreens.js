@@ -11,11 +11,13 @@ import {
 } from '../actions/videoActions';
 function ListVideoScreen(props) {
     // const videos = data.videos;
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
 
     const [modalVisible, setModalVisible] = useState(false);
     const [id, setId] = useState('');
     const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
+    const [author, setAuthor] = useState(userInfo.name);
     const [pathvideo, setPathvideo] = useState('');
     const [uploading, setUploading] = useState(false);
     const videoList = useSelector((state) => state.videoList);
@@ -40,6 +42,7 @@ function ListVideoScreen(props) {
         if (successSave) {
             setModalVisible(false);
         }
+
         dispatch(yourVideos(props.match.params.id));//props.match.params.id tương ứng phần /:id của router này
         return () => {
             //
@@ -50,7 +53,7 @@ function ListVideoScreen(props) {
         setModalVisible(true);
         setId(video._id);
         setTitle(video.title);
-        setAuthor(video.author);
+        // setAuthor(video.author);
         setPathvideo(video.pathvideo);
     };
     const submitHandler = (e) => {
@@ -116,14 +119,14 @@ function ListVideoScreen(props) {
                                                 <Form.Label className="text-center">
                                                     Author
                                                 </Form.Label>
-                                                <Form.Control placeholder="Enter author" type="text" name="author" value={author} id="author" onChange={(e) => setAuthor(e.target.value)} />
+                                                <Form.Control placeholder="Enter author" type="text" name="author" value={author} id="author" onChange={(e) => setAuthor(e.target.value)} disabled/>
                                             </Form.Group>
 
                                             <Form.Group className="mb-3" controlId="formBasicPath">
                                                 <Form.Label className="text-center">
                                                     Path
                                                 </Form.Label>
-                                                <Form.Control placeholder="Path"   type="text" name="pathvideo" value={pathvideo} id="pathvideo" onChange={(e) => setPathvideo(e.target.value)} />
+                                                <Form.Control placeholder="Path" type="text" name="pathvideo" value={pathvideo} id="pathvideo" onChange={(e) => setPathvideo(e.target.value)} />
                                             </Form.Group>
 
                                             <label for="formFileMultiple" class="form-label">Multiple files input example</label>
@@ -185,7 +188,7 @@ function ListVideoScreen(props) {
                                 <Row>
                                     <Col md={6}>
                                         <div className="d-grid">
-                                            <Button  onClick={() => openModal(video)}>Edit</Button>
+                                            <Button onClick={() => openModal(video)}>Edit</Button>
                                         </div>
 
                                     </Col>
@@ -203,9 +206,9 @@ function ListVideoScreen(props) {
                     ))
                     }
                     <div className="col-md-4 d-flex justify-content-center align-items-center">
-                    <Button onClick={() => openModal({})}>New Video</Button>
-                        
-                        </div>
+                        <Button onClick={() => openModal({})}>New Video</Button>
+
+                    </div>
 
                 </Row>
             </div>)
