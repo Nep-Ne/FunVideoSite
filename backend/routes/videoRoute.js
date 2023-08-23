@@ -62,10 +62,10 @@ router.get('/seed', async (req, res) => {//cái này phải được đặt trư
 });
 
 router.put('/:id', isAuth, isAdmin, async (req, res) => {
-  const videoId = req.params.id;
+  const videoId = req.params.id;//req.params tương ứng phần trên thanh url
   const video = await Video.findById(videoId);
   if (video) {
-    video.title = req.body.title;
+    video.title = req.body.title;//req.body tương ứng phần nội dung form  !!!
     video.author = req.body.author;
     video.pathvideo = req.body.pathvideo;
     const updatedVideo = await video.save();

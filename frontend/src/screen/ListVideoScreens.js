@@ -40,7 +40,7 @@ function ListVideoScreen(props) {
         if (successSave) {
             setModalVisible(false);
         }
-        dispatch(yourVideos(props.match.params.id));
+        dispatch(yourVideos(props.match.params.id));//props.match.params.id tương ứng phần /:id của router này
         return () => {
             //
         };
