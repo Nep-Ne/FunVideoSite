@@ -19,8 +19,8 @@ mongoose
 const app = express();
 
 app.use(bodyParser.json());
-// app.use('/api/uploads',uploadRoute);//cái này ko ảnh hưởng đến việc lấy file trong folder uploads!!!!
-// app.use('/api/users',userRoute);
+app.use('/api/uploads',uploadRoute);//cái này ko ảnh hưởng đến việc lấy file trong folder uploads!!!!
+app.use('/api/users',userRoute);
 app.use('/api/videos', videoRoute);
 
 //thiếu phần uploads này thì sẽ ko đọc được file trong folder uploads !!!

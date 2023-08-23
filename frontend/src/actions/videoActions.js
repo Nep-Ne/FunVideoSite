@@ -30,17 +30,17 @@ import {
     }
   };
   
-  const yourVideos = () => async (dispatch) => {
-    try {
-      dispatch({ type: VIDEO_LIST_REQUEST });
-      const { data } = await axios.get(
-        '/api/videos' 
-      );
-      dispatch({ type: VIDEO_LIST_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({ type: VIDEO_LIST_FAIL, payload: error.message });
-    }
-  };
+  // const yourVideos = () => async (dispatch) => {
+  //   try {
+  //     dispatch({ type: VIDEO_LIST_REQUEST });
+  //     const { data } = await axios.get(
+  //       '/api/videos' 
+  //     );
+  //     dispatch({ type: VIDEO_LIST_SUCCESS, payload: data });
+  //   } catch (error) {
+  //     dispatch({ type: VIDEO_LIST_FAIL, payload: error.message });
+  //   }
+  // };
 
   const detailsVideos =(videoId) => async(dispatch) =>
   {
@@ -55,12 +55,59 @@ import {
     }
   };
 
+  const deleteVideo = (videoId) => async (dispatch, getState) => {
+    try {
+      const {
+        userSignin: { userInfo },
+      } = getState();
+      dispatch({ type: VIDEO_DELETE_REQUEST, payload: videoId });
+      const { data } = await axios.delete('/api/videos/' + videoId, {
+        headers: {
+          Authorization: 'Bearer ' + userInfo.token,
+        },
+      });
+      dispatch({ type: VIDEO_DELETE_SUCCESS, payload: data, success: true });
+    } catch (error) {
+      dispatch({ type: VIDEO_DELETE_FAIL, payload: error.message });
+    }
+  };
+  
+  const saveVideo = (video) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: VIDEO_SAVE_REQUEST, payload: video });
+      const {
+        userSignin: { userInfo },
+      } = getState();
+      if (!video._id) {
+        const { data } = await Axios.post('/api/videos', video, {
+          headers: {
+            Authorization: 'Bearer ' + userInfo.token,
+          },
+        });
+        dispatch({ type: VIDEO_SAVE_SUCCESS, payload: data });
+      } else {
+        const { data } = await Axios.put(
+          '/api/videos/' + video._id,
+          video,
+          {
+            headers: {
+              Authorization: 'Bearer ' + userInfo.token,
+            },
+          }
+        );
+        dispatch({ type: VIDEO_SAVE_SUCCESS, payload: data });
+      }
+    } catch (error) {
+      dispatch({ type: VIDEO_SAVE_FAIL, payload: error.message });
+    }
+  };
+  
 
   export {
     listVideos,
     detailsVideos,
     // yourVideos,
-    // saveVideos,
-    // deleteVideos,
-    // saveVideosReview,
+    saveVideo,
+    deleteVideo,
+    // saveVideoReview,
   };

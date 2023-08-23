@@ -1,12 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-
+import { useSelector, useDispatch } from 'react-redux';
+import { signin } from '../actions/userActions';
 
 function SigninScreen(props) {
-  const submitHandler = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const userSignin = useSelector(state => state.userSignin);
+  const { loading, userInfo, error } = userSignin;
+  const dispatch = useDispatch();
+  const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+    return () => {
+      //
+    };
+  }, [userInfo]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
 
   }
 
+  const handleChangeEmail = (e) => {
+    e.preventDefault(); // prevent the default action
+    setEmail(e.target.value); // set name to e.target.value (event)
+  };
+  const handleChangePass = (e) => {
+    e.preventDefault(); // prevent the default action
+    setPassword(e.target.value); // set name to e.target.value (event)
+  };
   return (<div>
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
@@ -18,12 +44,12 @@ function SigninScreen(props) {
                 <h2 className="fw-bold mb-2 text-uppercase ">Sign in</h2>
                 <p className=" mb-5">Please enter your login and password!</p>
                 <div className="mb-3">
-                  <Form>
+                  <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                       <Form.Label className="text-center">
                         Email address
                       </Form.Label>
-                      <Form.Control type="email" placeholder="Enter email" />
+                      <Form.Control type="email" placeholder="Enter email" onChange={handleChangeEmail}/>
                     </Form.Group>
 
                     <Form.Group
@@ -31,7 +57,7 @@ function SigninScreen(props) {
                       controlId="formBasicPassword"
                     >
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" placeholder="Password" />
+                      <Form.Control type="password" placeholder="Password" onChange={handleChangePass}/>
                     </Form.Group>
                     <Form.Group
                       className="mb-3"
@@ -44,7 +70,7 @@ function SigninScreen(props) {
                       </p>
                     </Form.Group>
                     <div className="d-grid">
-                      <Button variant="primary" type="submit">
+                      <Button variant="primary" type="submit" >
                         Login
                       </Button>
                     </div>

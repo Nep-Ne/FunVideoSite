@@ -9,11 +9,11 @@ import thunk from 'redux-thunk';
 //   videoReviewSaveReducer,
  } from './reducers/videoReducers';
 // import { cartReducer } from './reducers/cartReducers';
-// import {
-//   userSigninReducer,
-//   userRegisterReducer,
-//   userUpdateReducer,
-// } from './reducers/userReducers';
+import {
+  userSigninReducer,
+  userRegisterReducer,
+  userUpdateReducer,
+} from './reducers/userReducers';
 // import {
 //   orderCreateReducer,
 //   orderDetailsReducer,
@@ -34,15 +34,15 @@ const reducer = combineReducers({
    videoList: videoListReducer,
   videoDetails: videoDetailsReducer,
   // cart: cartReducer,
-  // userSignin: userSigninReducer,
-  // userRegister: userRegisterReducer,
+  userSignin: userSigninReducer,
+  userRegister: userRegisterReducer,
   videoSave: videoSaveReducer,
   videoDelete: videoDeleteReducer,
   // videoReviewSave: videoReviewSaveReducer,
   // orderCreate: orderCreateReducer,
   // orderDetails: orderDetailsReducer,
   // orderPay: orderPayReducer,
-  // userUpdate: userUpdateReducer,
+  userUpdate: userUpdateReducer,
   // myOrderList: myOrderListReducer,
   // orderList: orderListReducer,
   // orderDelete: orderDeleteReducer,
