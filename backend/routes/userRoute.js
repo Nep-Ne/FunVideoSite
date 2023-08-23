@@ -29,7 +29,7 @@ router.post('/signin', async (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
-  console.log(req.body.email);
+  // console.log(req.body.email);
   if (signinUser) {
     res.send({
       _id: signinUser.id,

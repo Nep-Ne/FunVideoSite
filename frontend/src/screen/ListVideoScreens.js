@@ -7,6 +7,7 @@ import {
     saveVideo,
     listVideos,
     deleteVideo,
+    yourVideos,
 } from '../actions/videoActions';
 function ListVideoScreen(props) {
     // const videos = data.videos;
@@ -39,7 +40,7 @@ function ListVideoScreen(props) {
         if (successSave) {
             setModalVisible(false);
         }
-        dispatch(listVideos());
+        dispatch(yourVideos(props.match.params.id));
         return () => {
             //
         };

@@ -30,17 +30,17 @@ import {
     }
   };
   
-  // const yourVideos = () => async (dispatch) => {
-  //   try {
-  //     dispatch({ type: VIDEO_LIST_REQUEST });
-  //     const { data } = await axios.get(
-  //       '/api/videos' 
-  //     );
-  //     dispatch({ type: VIDEO_LIST_SUCCESS, payload: data });
-  //   } catch (error) {
-  //     dispatch({ type: VIDEO_LIST_FAIL, payload: error.message });
-  //   }
-  // };
+  const yourVideos = (userId) => async (dispatch) => {//xài chung reducer+ constant+store của listVideos ?
+    try {
+      dispatch({ type: VIDEO_LIST_REQUEST });
+      const { data } = await axios.get(
+        '/api/videos/author/' + userId
+      );
+      dispatch({ type: VIDEO_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: VIDEO_LIST_FAIL, payload: error.message });
+    }
+  };
 
   const detailsVideos =(videoId) => async(dispatch) =>
   {
@@ -72,6 +72,7 @@ import {
     }
   };
   
+
   const saveVideo = (video) => async (dispatch, getState) => {
     try {
       dispatch({ type: VIDEO_SAVE_REQUEST, payload: video });
@@ -106,7 +107,7 @@ import {
   export {
     listVideos,
     detailsVideos,
-    // yourVideos,
+    yourVideos,
     saveVideo,
     deleteVideo,
     // saveVideoReview,

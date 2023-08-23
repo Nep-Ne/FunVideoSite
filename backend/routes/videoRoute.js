@@ -1,5 +1,6 @@
 import express from 'express';
 import Video from '../models/videoModel';
+import User from '../models/userModel';
 import { isAuth, isAdmin } from '../util';
 
 const router = express.Router();
@@ -30,6 +31,17 @@ router.get('/:id', async (req, res) => {
   const video = await Video.findOne({ _id: req.params.id });
   if (video) {
     res.send(video);
+  } else {
+    res.status(404).send({ message: 'Video Not Found.' });
+  }
+});
+
+router.get('/author/:id', async (req, res) => {
+  const user = await User.findOne({_id: req.params.id});
+  // console.log(user);
+  const videos = await Video.find({ author: user.name });
+  if (videos) {
+    res.send(videos);
   } else {
     res.status(404).send({ message: 'Video Not Found.' });
   }

@@ -33,7 +33,8 @@ function App() {
               <Button href="/signin">Signin</Button>
             )}
 
-            {userInfo && userInfo.isAdmin && (
+            {/* {userInfo  && ( */}
+             {userInfo && userInfo.isAdmin && (
               // <div className="dropdown">
               //   <a href="#">Admin</a>
               //   <ul className="dropdown-content">
@@ -44,7 +45,7 @@ function App() {
               //   </ul>
               // </div>
               <NavDropdown title="Action" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/videos">Videos</NavDropdown.Item>
+                <NavDropdown.Item href={"/videos/author/" + userInfo._id}>Videos</NavDropdown.Item>
               </NavDropdown>
             )}
           </Navbar.Collapse>
@@ -76,7 +77,8 @@ function App() {
           <Route path="/signin" component={SigninScreen} />
           <Route path="/signup" component={SignupScreen} />
           <Route path="/profile" component={ProfileScreen} />
-          <Route path="/videos" component={ListVideoScreen} />
+          <Route path="/videos" exact={true} component={ListVideoScreen} />
+          <Route path="/videos/author/:id" component={ListVideoScreen} />
           <Route path="/uploads" component={UploadScreen} />
           <Route path="/video/:id" component={VideoScreen} />
         </body>
