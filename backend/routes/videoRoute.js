@@ -92,6 +92,23 @@ router.put('/:id', isAuth,  async (req, res) => {
 
 })
 
+router.patch('/:id',  async (req, res) => {//put không sử được do cái trên cũng dùng put cùng đường dẫn luôn!!!
+  const videoId = req.params.id;
+  const video = await Video.findById(videoId);
+  if (video) {
+    video.views=req.body.views+1;
+    const updatedVideo = await video.save();
+    if (updatedVideo) {
+      return res
+        .status(200)
+        .send({ message: 'Video Updated', data: updatedVideo });
+    }
+  }
+
+})
+
+
+
 router.delete('/:id', isAuth, async (req, res) => {
   const videoId = req.params.id;
   const deletedVideo = await Video.findById(videoId);
