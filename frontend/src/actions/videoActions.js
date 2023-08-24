@@ -102,6 +102,23 @@ import {
       dispatch({ type: VIDEO_SAVE_FAIL, payload: error.message });
     }
   };
+
+// sử dụng chung constant,reducer của saveVideo!!
+  const increaseviewVideo = (video) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: VIDEO_SAVE_REQUEST, payload: video });
+      
+       
+        const { data } = await Axios.patch(
+          '/api/videos/' + video._id,
+          video
+        );
+        dispatch({ type: VIDEO_SAVE_SUCCESS, payload: data });
+      
+    } catch (error) {
+      dispatch({ type: VIDEO_SAVE_FAIL, payload: error.message });
+    }
+  };
   
 
   export {
@@ -110,5 +127,6 @@ import {
     yourVideos,
     saveVideo,
     deleteVideo,
+    increaseviewVideo,
     // saveVideoReview,
   };

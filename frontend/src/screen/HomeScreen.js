@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 // import data from '../data.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { listVideos } from '../actions/videoActions';
-
+import {
+    increaseviewVideo,
+  } from '../actions/videoActions';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 function HomeScreen(props) {
     // const videos = data.videos;//nếu để data không thì sẽ bị lỗi vì data không có hàm map chỉ có cái videos của cái data (data.videos) thì mới có thể sử dụng hàm map !!
@@ -10,7 +12,16 @@ function HomeScreen(props) {
 
     const videoList = useSelector((state) => state.videoList);
     const { videos, loading, error } = videoList;
+    const [views,setViews] =useState(0);
     const dispatch = useDispatch();
+
+    const handleViews =(video) =>
+    {
+        // setViews=(video.views+1);
+        // console.log(views);
+        dispatch(increaseviewVideo(video));
+
+    }
     useEffect(() => {
         dispatch(listVideos());//đừng để thiếu () của hàm listVideos như vậy nó sẽ chạy ko đúng  !!!!!
 
@@ -68,7 +79,7 @@ function HomeScreen(props) {
                         thêm 1 cột col-md-2 nữa thôi nếu lớn hơn thì sẽ tự động dưa xuống dòng tiếp theo*/}
                                 <div className="pb-video">
                                     <video className="pb-video-frame" width="100%" height="230" src={video.pathvideo}  controls muted ></video>
-                                    <a className="form-control label-warning text-center" href={"/video/"+video._id}>{video.title} - {video.author}</a>
+                                    <a className="form-control label-warning text-center" href={"/video/"+video._id} onClick={()=> handleViews(video)}>{video.title} - {video.author} </a>
                                 </div>
                             </div>
                         ))}

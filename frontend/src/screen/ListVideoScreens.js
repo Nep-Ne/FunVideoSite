@@ -64,6 +64,7 @@ function ListVideoScreen(props) {
                 title,
                 author,
                 pathvideo,
+                //views,
 
             })
         );
