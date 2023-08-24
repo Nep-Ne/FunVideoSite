@@ -1,6 +1,36 @@
-import react from "react";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import {  update } from '../actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Row } from "react-bootstrap";
 function ProfileScreen(props) {
+const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
+  const userSignin = useSelector(state => state.userSignin);
+  const { userInfo } = userSignin;
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(update({ userId: userInfo._id, email, name, password }))
+  }
+  const userUpdate = useSelector(state => state.userUpdate);
+  const { loading, success, error } = userUpdate;
+  useEffect(() => {
+    if (userInfo) {
+      console.log(userInfo.name)
+      setEmail(userInfo.email);
+      setName(userInfo.name);
+      setPassword(userInfo.password);
+    }
+    return () => {
+
+    };
+  }, [userInfo])
+
+
+
     return (
         <div class="container rounded bg-white mt-5 mb-5">
             <div class="row">
@@ -13,7 +43,7 @@ function ProfileScreen(props) {
                             <h4 class="text-right">Profile Settings</h4>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value="" /></div>
+                            <div class="col-md-6"><label class="labels">Name</label><input value={name} type="name" name="name" id="name" onChange={(e) => setName(e.target.value)} /></div>
                             <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname" /></div>
                         </div>
                         <div class="row mt-3">
@@ -23,15 +53,15 @@ function ProfileScreen(props) {
                             <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value="" /></div>
                             <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value="" /></div>
                             <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value="" /></div>
-                            <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value="" /></div>
-                            <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value="" /></div>
+                            <div class="col-md-12"><label class="labels">Email ID</label><input value={email} type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} /></div>
+                            <div class="col-md-12"><label class="labels">Password</label><input value={password} type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)} /></div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value="" /></div>
                             <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state" /></div>
                         </div>
                         <Row>
-                        <div class="col-md-4 mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                        <div class="col-md-4 mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onClick={submitHandler}>Save Profile</button></div>
                         <div class="col-md-4 mt-5 text-center"><a class="btn btn-primary profile-button" href="/uploads" type="button">Upload video</a></div>
                         {/* ban đầu là button  Upload video chứ ko phải a nhưng theo cách bootstrap này phải dùng a chứ ko được dùng button, nếu dùng button của react bootstrap thì vẫn có thể dùng href!!!*/}
 
