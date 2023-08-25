@@ -8,12 +8,13 @@ import {
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 function HomeScreen(props) {
     // const videos = data.videos;//nếu để data không thì sẽ bị lỗi vì data không có hàm map chỉ có cái videos của cái data (data.videos) thì mới có thể sử dụng hàm map !!
-    // console.log(videos);//xem consolse của frontend trong phần kiểm tra phần tử !!!
+     
 
     const videoList = useSelector((state) => state.videoList);
     const { videos, loading, error } = videoList;
     const [views,setViews] =useState(0);
     const dispatch = useDispatch();
+    console.log(videos);//xem consolse của frontend trong phần kiểm tra phần tử !!!
 
     const handleViews =(video) =>
     {

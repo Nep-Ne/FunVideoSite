@@ -11,9 +11,9 @@ import {
     VIDEO_DELETE_SUCCESS,
     VIDEO_DELETE_FAIL,
     VIDEO_DELETE_REQUEST,
-    VIDEO_REVIEW_SAVE_REQUEST,
-    VIDEO_REVIEW_SAVE_FAIL,
-    VIDEO_REVIEW_SAVE_SUCCESS,
+    VIDEO_COMMENT_SAVE_REQUEST,
+    VIDEO_COMMENT_SAVE_FAIL,
+    VIDEO_COMMENT_SAVE_SUCCESS,
   } from '../constants/videoConstants';
   import axios from 'axios';
   import Axios from 'axios';
@@ -119,6 +119,30 @@ import {
       dispatch({ type: VIDEO_SAVE_FAIL, payload: error.message });
     }
   };
+
+  const saveVideoComment = (videoId, comment) => async (dispatch, getState) => {
+    try {
+      const {
+        userSignin: {
+          userInfo: { token },
+        },
+      } = getState();
+      dispatch({ type: VIDEO_COMMENT_SAVE_REQUEST, payload: comment });
+      const { data } = await axios.post(
+        '/api/videos/'+videoId+'/comments',
+        comment,
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        }
+      );
+      dispatch({ type: VIDEO_COMMENT_SAVE_SUCCESS, payload: data });
+    } catch (error) {
+      // report error
+      dispatch({ type: VIDEO_COMMENT_SAVE_FAIL, payload: error.message });
+    }
+  };
   
 
   export {
@@ -128,5 +152,5 @@ import {
     saveVideo,
     deleteVideo,
     increaseviewVideo,
-    // saveVideoReview,
+    saveVideoComment,
   };

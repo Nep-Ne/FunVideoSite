@@ -136,11 +136,29 @@ router.post('/', isAuth,  async (req, res) => {
 } catch (error) {
   res.send({ message: error.message });
 }
-
-  
-
-
 }
-)
+);
+
+
+router.post('/:id/comments', isAuth, async (req, res) => {
+  const video = await Video.findById(req.params.id);
+  if (video) {
+    const comment = {
+      author: req.body.author,
+      comment: req.body.comment,
+    };
+    video.comments.push(comment);
+    
+    
+    const updatedVideo = await video.save();
+    res.status(201).send({
+      data: updatedVideo.comments[updatedVideo.comments.length - 1],
+      message: 'Comments saved successfully.',
+    });
+  } else {
+    res.status(404).send({ message: 'Video Not Found' });
+  }
+});
+
 
 export default router;

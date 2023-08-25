@@ -11,10 +11,10 @@ import {
     VIDEO_DELETE_REQUEST,
     VIDEO_DELETE_SUCCESS,
     VIDEO_DELETE_FAIL,
-    VIDEO_REVIEW_SAVE_SUCCESS,
-    VIDEO_REVIEW_SAVE_REQUEST,
-    VIDEO_REVIEW_SAVE_FAIL,
-    VIDEO_REVIEW_SAVE_RESET,
+    VIDEO_COMMENT_SAVE_SUCCESS,
+    VIDEO_COMMENT_SAVE_REQUEST,
+    VIDEO_COMMENT_SAVE_FAIL,
+    VIDEO_COMMENT_SAVE_RESET,
   } from '../constants/videoConstants';
   
   function videoListReducer(state = { videos: [] }, action) {
@@ -68,15 +68,15 @@ import {
         return state;
     }
   }
-  function videoReviewSaveReducer(state = {}, action) {
+  function videoCommentSaveReducer(state = {}, action) {
     switch (action.type) {
-      case VIDEO_REVIEW_SAVE_REQUEST:
+      case VIDEO_COMMENT_SAVE_REQUEST:
         return { loading: true };
-      case VIDEO_REVIEW_SAVE_SUCCESS:
+      case VIDEO_COMMENT_SAVE_SUCCESS:
         return { loading: false, review: action.payload, success: true };
-      case VIDEO_REVIEW_SAVE_FAIL:
+      case VIDEO_COMMENT_SAVE_FAIL:
         return { loading: false, errror: action.payload };
-      case VIDEO_REVIEW_SAVE_RESET:
+      case VIDEO_COMMENT_SAVE_RESET:
         return {};
       default:
         return state;
@@ -88,6 +88,6 @@ import {
     videoDetailsReducer,
     videoSaveReducer,
     videoDeleteReducer,
-    videoReviewSaveReducer,
+    videoCommentSaveReducer,
   };
   

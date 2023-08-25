@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
   videoDetailsReducer,
   videoSaveReducer,
   videoDeleteReducer,
-//   videoReviewSaveReducer,
+  videoCommentSaveReducer,
  } from './reducers/videoReducers';
 // import { cartReducer } from './reducers/cartReducers';
 import {
@@ -38,7 +38,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   videoSave: videoSaveReducer,
   videoDelete: videoDeleteReducer,
-  // videoReviewSave: videoReviewSaveReducer,
+  videoCommentSave: videoCommentSaveReducer,
   // orderCreate: orderCreateReducer,
   // orderDetails: orderDetailsReducer,
   // orderPay: orderPayReducer,
